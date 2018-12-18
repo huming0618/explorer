@@ -1,13 +1,39 @@
 <template>
   <div class="app-container block-detail">
-    <el-form :inline="true" :model="form">
-      <el-form-item label="账户地址" class="label-class" required prop="address">
-        <el-input v-model="form.address" size="max" placeholder="账户地址" autofocus="true" type="string"/>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="fetchData">查询</el-button>
-      </el-form-item>
-    </el-form>
+    <el-row>
+      <el-col :span="12">
+        <el-form :inline="true" :model="form">
+          <el-form-item label="账户地址" class="label-class" required prop="address">
+            <el-input v-model="form.address" size="max" placeholder="账户地址" autofocus="true" type="string"/>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="fetchData">查询</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <el-col :span="12">
+        <el-form v-show="account.address" :inline="true" :model="form">
+          <el-form-item>
+            <el-dropdown>
+              <el-button type="danger">
+                领取测试网代币<i class="el-icon-arrow-down el-icon--right" />
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>qsc</el-dropdown-item>
+                <el-dropdown-item>qstar</el-dropdown-item>
+                <el-dropdown-item>qos</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-form-item>
+          <el-form-item class="label-class" prop="address">
+            <el-input size="max" placeholder="代币数目" autofocus="true" type="string"/>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="fetchData">领取</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+    </el-row>
     <div v-show="account.address">
       <el-card class="box-card">
         <div slot="header" class="card-header">
