@@ -13,20 +13,20 @@
       </el-col>
       <el-col :span="12">
         <el-form v-show="account.address" :inline="true" :model="form">
-          <el-form-item>
-            <el-dropdown>
-              <el-button type="danger">
-                领取测试网代币<i class="el-icon-arrow-down el-icon--right" />
+          <el-form-item label="领取测试网代币" class="label-class" prop="address">
+            <el-input size="max" placeholder="代币数目" autofocus="true" type="string" value="1000" maxlength="10"/>
+          </el-form-item>
+          <el-form-item class="label-class">
+            <el-dropdown trigger="click" @command="getReward">
+              <el-button type="success">
+                QOST<i class="el-icon-arrow-down el-icon--right" />
               </el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>qsc</el-dropdown-item>
-                <el-dropdown-item>qstar</el-dropdown-item>
-                <el-dropdown-item>qos</el-dropdown-item>
+                <el-dropdown-item command="qos">qos</el-dropdown-item>
+                <el-dropdown-item command="qsc">qsc</el-dropdown-item>
+                <el-dropdown-item command="qstar">qstar</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
-          </el-form-item>
-          <el-form-item class="label-class" prop="address">
-            <el-input size="max" placeholder="代币数目" autofocus="true" type="string"/>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="fetchData">领取</el-button>
@@ -132,6 +132,9 @@ export default {
       account: {
         coins: []
       },
+      rewards: {
+        coins: []
+      },
       txs: [],
       listLoading: true
     }
@@ -152,6 +155,9 @@ export default {
     async fetchAccountTxs() {
       const response = await getAccountTxs(this.form)
       this.txs = response.result
+    },
+    getReward(coin) {
+      this.$message('click on item ' + coin)
     }
   }
 }
@@ -168,6 +174,11 @@ export default {
       &:first-child {
         margin: 0 auto;
       }
+    }
+
+    .el-dropdown-link {
+      cursor: pointer;
+      color: #409EFF;
     }
 
     .label {

@@ -7,6 +7,13 @@ export function getAccount(params) {
   })
 }
 
+export function getTestNetCoinReward(params) {
+  return request({
+    url: '/accounts/' + params.address + '/withdraw',
+    method: 'get'
+  })
+}
+
 export function getAccountTxs(params) {
   return request({
     url: '/accounts/' + params.address + '/txs',
