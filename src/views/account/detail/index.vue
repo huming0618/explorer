@@ -12,7 +12,7 @@
         </el-form>
       </el-col>
       <el-col :span="12">
-        <el-form v-show="account.address" :inline="true" :model="form">
+        <el-form :inline="true" :model="form">
           <el-form-item label="领取测试网代币" class="label-class" prop="address">
             <el-input size="max" placeholder="代币数目" autofocus="true" type="string" value="1000" maxlength="10"/>
           </el-form-item>
